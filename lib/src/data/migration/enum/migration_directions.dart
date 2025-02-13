@@ -1,0 +1,4 @@
+enum MigrationDirections {
+  up,
+  down,
+}
