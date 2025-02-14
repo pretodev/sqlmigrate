@@ -5,11 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "dart-sql-migrate",
+      "name": "sqlmigrate",
       "request": "launch",
       "type": "dart",
-      "program": "bin/dart_sql_migrate.dart",
-      "args": ["up"],
+      "program": "bin/sqlmigrate.dart",
+      "args": ["help", "up"],
     }
   ]
 }
