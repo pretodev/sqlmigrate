@@ -1,6 +1,6 @@
 name: sqlmigrate
 description: A lightweight CLI for managing database migrations in Dart/Flutter projects.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/pretodev/sqlmigrate
 
 environment:
