@@ -9,11 +9,13 @@ import '../values/result.dart';
 import 'down_command_params.dart';
 
 class DownCommand extends Command {
-  DownCommand({required this.applyMigrations});
+  DownCommand({required this.applyMigrations}) {
+    params = DownCommandParams(this);
+  }
 
   final ApplyMigrations applyMigrations;
 
-  late final params = DownCommandParams(this);
+  late final DownCommandParams params;
   @override
   final name = 'down';
 

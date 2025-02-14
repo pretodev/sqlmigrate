@@ -8,9 +8,11 @@ import '../values/result.dart';
 import 'new_command_params.dart';
 
 class NewCommand extends Command {
-  NewCommand({required this.logger, required this.createMigration});
+  NewCommand({required this.logger, required this.createMigration}) {
+    params = NewCommandParams(this);
+  }
 
-  late final params = NewCommandParams(this);
+  late final NewCommandParams params;
 
   final Logger logger;
   final CreateMigration createMigration;

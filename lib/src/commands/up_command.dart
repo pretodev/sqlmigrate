@@ -9,11 +9,14 @@ import '../values/result.dart';
 import 'up_command_params.dart';
 
 class UpCommand extends Command {
-  UpCommand({required this.applyMigrations});
+  UpCommand({required this.applyMigrations}) {
+    params = UpCommandParams(this);
+  }
 
   final ApplyMigrations applyMigrations;
 
-  late final params = UpCommandParams(this);
+  late final UpCommandParams params;
+
   @override
   final name = 'up';
 
