@@ -1,6 +1,4 @@
-import 'package:args/args.dart';
-
-import 'base_params.dart';
+part of '../sqlmigrate.dart';
 
 class UpCommandParams extends BaseParams {
   static const String limitKey = 'limit';

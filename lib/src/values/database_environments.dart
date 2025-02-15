@@ -1,4 +1,0 @@
-enum DatabaseEnvironments {
-  development,
-  production,
-}

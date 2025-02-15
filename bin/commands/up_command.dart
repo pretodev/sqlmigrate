@@ -1,12 +1,4 @@
-import 'dart:async';
-
-import 'package:args/command_runner.dart';
-
-import '../data/migration/enum/migration_directions.dart';
-import '../output/output.dart';
-import '../usecases/apply_migrations.dart';
-import '../values/result.dart';
-import 'up_command_params.dart';
+part of '../sqlmigrate.dart';
 
 class UpCommand extends Command {
   UpCommand({required this.applyMigrations}) {
@@ -47,5 +39,6 @@ class UpCommand extends Command {
         // TODO: Handle this case.
         throw UnimplementedError();
     }
+    return null;
   }
 }

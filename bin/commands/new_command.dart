@@ -1,11 +1,4 @@
-import 'dart:async';
-
-import 'package:args/command_runner.dart';
-import 'package:cli_util/cli_logging.dart';
-
-import '../usecases/create_migration.dart';
-import '../values/result.dart';
-import 'new_command_params.dart';
+part of '../sqlmigrate.dart';
 
 class NewCommand extends Command {
   NewCommand({required this.logger, required this.createMigration}) {
@@ -40,5 +33,6 @@ class NewCommand extends Command {
         // TODO: Handle this case.
         throw UnimplementedError();
     }
+    return null;
   }
 }

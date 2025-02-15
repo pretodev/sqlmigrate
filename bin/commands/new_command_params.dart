@@ -1,4 +1,4 @@
-import 'base_params.dart';
+part of '../sqlmigrate.dart';
 
 class NewCommandParams extends BaseParams {
   NewCommandParams(super.command);

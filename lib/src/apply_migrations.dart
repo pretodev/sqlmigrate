@@ -1,13 +1,13 @@
-import '../data/configuration/configuration_reader.dart';
-import '../data/database/database.dart';
-import '../data/database/database_factory.dart';
-import '../data/database/enum/database_dialects.dart';
-import '../data/migration/enum/migration_directions.dart';
-import '../data/migration/migration_reader.dart';
-import '../data/migration/migration_source.dart';
-import '../data/migration/models/migration.dart';
-import '../data/migration/models/migration_file.dart';
-import '../values/result.dart';
+import 'configuration/configuration_reader.dart';
+import 'database/database.dart';
+import 'database/database_factory.dart';
+import 'database/enum/database_dialects.dart';
+import 'migration/enum/migration_directions.dart';
+import 'migration/migration_reader.dart';
+import 'migration/migration_source.dart';
+import 'migration/models/migration.dart';
+import 'migration/models/migration_file.dart';
+import 'result/result.dart';
 
 typedef PlannedMigration = ({String id, Migration migration});
 

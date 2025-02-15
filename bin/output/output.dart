@@ -1,5 +1,4 @@
-import '../data/migration/enum/migration_directions.dart';
-import '../usecases/apply_migrations.dart';
+part of '../sqlmigrate.dart';
 
 class Output {
   static void printPlannedMigration(MigrationDirections direction, {required PlannedMigration data}) {

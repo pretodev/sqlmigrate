@@ -1,6 +1,4 @@
-import 'package:args/args.dart';
-import 'package:args/command_runner.dart';
-import 'package:meta/meta.dart';
+part of '../sqlmigrate.dart';
 
 abstract class BaseParams {
   static const envKey = 'env';
@@ -18,7 +16,7 @@ abstract class BaseParams {
   void parser(ArgParser parser) {
     parser
       ..addOption(configKey, defaultsTo: _configurationPath, help: 'Configuration file to use.')
-      ..addOption(envKey, defaultsTo: _environment, help: 'Environment.');
+      ..addOption(envKey, defaultsTo: _environment, help: 'Environment');
   }
 
   final _configurationPath = 'pubspec.yaml';
