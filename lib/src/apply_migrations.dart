@@ -38,7 +38,7 @@ class ApplyMigrations {
       final environment = _configurationReader.findEnvironment(configPath, environmentName);
 
       database = _databaseFactory.fromDialect(
-        DatabaseDialects.postgres,
+        DatabaseDialects.fromString(environment.dialect),
         tableName: environment.tableName,
         datasource: environment.datasource,
       );
