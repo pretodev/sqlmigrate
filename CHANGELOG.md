@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [0.2.0] - 2025-02-17
 
 ### Added
+- Update **Postgres** dependency to version `3.5.2` in `pubspec.yaml` and `pubspec.lock`.
 - **Enhance Configuration Handling**  
   - Introduced custom exceptions for configuration parsing (`ConfigurationException`).
   - Improved parsing logic for external and `pubspec.yaml`-based configurations.
