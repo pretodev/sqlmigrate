@@ -1,10 +1,12 @@
 abstract class SqlMigrateException implements Exception {
-  SqlMigrateException({required this.message});
+  SqlMigrateException(this.title, {required this.message});
+
+  final String title;
 
   final String message;
 
   @override
   String toString() {
-    return message;
+    return '$title: $message';
   }
 }
