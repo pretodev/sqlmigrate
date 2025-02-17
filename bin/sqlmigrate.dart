@@ -7,6 +7,8 @@ import 'package:auto_injector/auto_injector.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:meta/meta.dart';
 import 'package:sqlmigrate/sqlmigrate.dart';
+import 'package:sqlmigrate/src/exceptions/sql_migrate_exception.dart';
+import 'package:sqlmigrate/src/migration/models/migration_file.dart';
 
 part './commands/base_params.dart';
 part './commands/down_command.dart';
@@ -30,6 +32,7 @@ final i = AutoInjector(
     i.addLazySingleton(DownCommand.new);
     i.addLazySingleton(UpCommand.new);
     i.addLazySingleton(NewCommand.new);
+    i.addLazySingleton(Output.new);
     i.commit();
   },
 );

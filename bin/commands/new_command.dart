@@ -1,14 +1,14 @@
 part of '../sqlmigrate.dart';
 
 class NewCommand extends Command {
-  NewCommand({required this.logger, required this.createMigration}) {
+  NewCommand({required this.output, required this.createMigration}) {
     params = NewCommandParams(this);
   }
 
-  late final NewCommandParams params;
-
-  final Logger logger;
+  final Output output;
   final CreateMigration createMigration;
+
+  late final NewCommandParams params;
 
   @override
   final name = 'new';
@@ -28,11 +28,9 @@ class NewCommand extends Command {
     );
     switch (result) {
       case Ok():
-        logger.stdout('Created migration ${result.value.path}');
+        output.printCreatedMigration(result.value);
       case Error():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        output.printException(result.error);
     }
-    return null;
   }
 }

@@ -1,13 +1,15 @@
 part of '../sqlmigrate.dart';
 
 class DownCommand extends Command {
-  DownCommand({required this.applyMigrations}) {
+  DownCommand({required this.output, required this.applyMigrations}) {
     params = DownCommandParams(this);
   }
 
+  final Output output;
   final ApplyMigrations applyMigrations;
 
   late final DownCommandParams params;
+
   @override
   final name = 'down';
 
@@ -27,17 +29,19 @@ class DownCommand extends Command {
 
     switch (result) {
       case Ok():
+        if (result.value.isEmpty) {
+          output.printNoMigrations(direction);
+          return;
+        }
         for (final data in result.value) {
           if (params.dryRun) {
-            Output.printPlannedMigration(direction, data: data);
+            output.printPlannedMigration(direction, data: data);
           } else {
-            Output.printAppliedMigration(direction, data: data);
+            output.printAppliedMigration(direction, data: data);
           }
         }
       case Error():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        output.printException(result.error);
     }
-    return null;
   }
 }

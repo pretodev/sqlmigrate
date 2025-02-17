@@ -1,10 +1,11 @@
 part of '../sqlmigrate.dart';
 
 class UpCommand extends Command {
-  UpCommand({required this.applyMigrations}) {
+  UpCommand({required this.output, required this.applyMigrations}) {
     params = UpCommandParams(this);
   }
 
+  final Output output;
   final ApplyMigrations applyMigrations;
 
   late final UpCommandParams params;
@@ -28,17 +29,19 @@ class UpCommand extends Command {
 
     switch (result) {
       case Ok():
+        if (result.value.isEmpty) {
+          output.printNoMigrations(direction);
+          return;
+        }
         for (final data in result.value) {
           if (params.dryRun) {
-            Output.printPlannedMigration(direction, data: data);
+            output.printPlannedMigration(direction, data: data);
           } else {
-            Output.printAppliedMigration(direction, data: data);
+            output.printAppliedMigration(direction, data: data);
           }
         }
       case Error():
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        output.printException(result.error);
     }
-    return null;
   }
 }

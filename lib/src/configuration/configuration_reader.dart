@@ -78,7 +78,7 @@ class ConfigurationReader {
     return Environment(
       name: name,
       dialect: dialect,
-      datasource: datasource,
+      datasource: expandEnv(datasource),
       directoryPath: directoryPath,
       tableName: (envMap[_envTableKey] as String?) ?? '',
     );

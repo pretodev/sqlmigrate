@@ -42,7 +42,6 @@ class ApplyMigrations {
         tableName: environment.tableName,
         datasource: environment.datasource,
       );
-
       final migrationFiles = _migrationSource.findFiles(environment.directoryPath);
 
       await database.connect();
@@ -59,6 +58,10 @@ class ApplyMigrations {
           return names.contains(file.name);
         }),
       };
+
+      if (orderedMigrations.isEmpty) {
+        return const Result.ok([]);
+      }
 
       final plannedMigrations =
           orderedMigrations //
