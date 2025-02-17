@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:yaml/yaml.dart';
 
-import '../exceptions/invalid_configuration_exception.dart';
+import '../exceptions/configuration_exception.dart';
 import 'models/environment.dart';
 
 class ConfigurationReader {
@@ -22,7 +22,7 @@ class ConfigurationReader {
       if (_isPubspecFile(configurationPath)) {
         sourceMap = sourceMap[_pubspecRootKey] ?? {};
         if (sourceMap.entries.isEmpty) {
-          throw InvalidConfigurationException(
+          throw ConfigurationException(
             message: 'Invalid configuration: Not found $_pubspecRootKey entry in "pubscpec.yaml"',
           );
         }
@@ -35,7 +35,7 @@ class ConfigurationReader {
               .toList();
 
       if (environments.isEmpty) {
-        throw InvalidConfigurationException(
+        throw ConfigurationException(
           message: 'Invalid configuration: No environments found. Please define at least one environment.',
         );
       }
@@ -45,7 +45,7 @@ class ConfigurationReader {
       }
       return environments.first;
     } on PathNotFoundException {
-      throw InvalidConfigurationException(
+      throw ConfigurationException(
         message: 'Invalid configuration: Could not open the file at "$configurationPath". No such file or directory.',
       );
     }
@@ -61,23 +61,23 @@ class ConfigurationReader {
 
   Environment _mapEnvironment(String name, Map<String, dynamic> envMap) {
     if (name.isEmpty) {
-      throw InvalidConfigurationException(message: 'Invalid configuration: environment name is empty');
+      throw ConfigurationException(message: 'Invalid configuration: environment name is empty');
     }
     final directoryPath = (envMap[_envDirKey] as String?) ?? '';
     if (directoryPath.isEmpty) {
-      throw InvalidConfigurationException(
+      throw ConfigurationException(
         message: 'Invalid configuration: directory path (dir) property is missing or empty for environment "$name"',
       );
     }
     final dialect = (envMap[_envDialectKey] as String?) ?? '';
     if (dialect.isEmpty) {
-      throw InvalidConfigurationException(
+      throw ConfigurationException(
         message: 'Invalid configuration: "dialect" property is missing or empty for environment "$name"',
       );
     }
     final datasource = (envMap[_envDataSourceKey] as String?) ?? '';
     if (datasource.isEmpty) {
-      throw InvalidConfigurationException(
+      throw ConfigurationException(
         message: 'Invalid configuration: "datasource" property is missing or empty for environment "$name"',
       );
     }
