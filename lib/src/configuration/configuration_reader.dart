@@ -41,9 +41,11 @@ class ConfigurationReader {
       }
       return environments.first;
     } on PathNotFoundException {
-      throw ConfigurationException(
-        message: 'Could not open the file at "$configurationPath". No such file or directory.',
-      );
+      throw ConfigurationException(message: 'Could not open the file at "$configurationPath". No such yaml file.');
+    } on FileSystemException {
+      throw ConfigurationException(message: 'Could not open the file at "$configurationPath".');
+    } on YamlException {
+      throw ConfigurationException(message: 'Failed to parse the configuration file.');
     }
   }
 

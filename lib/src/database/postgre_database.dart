@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:postgres/postgres.dart';
 
+import '../exceptions/database_exception.dart';
 import 'database.dart';
 import 'models/migration_row.dart';
 
@@ -41,9 +44,13 @@ class PostgreDatabase extends Database {
 
   @override
   Future<void> setup() async {
-    final sql =
-        'CREATE TABLE IF NOT EXISTS $tableName(id TEXT NOT NULL PRIMARY KEY, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)';
-    await _pool?.execute(sql);
+    try {
+      final sql =
+          'CREATE TABLE IF NOT EXISTS $tableName(id TEXT NOT NULL PRIMARY KEY, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)';
+      await _pool?.execute(sql);
+    } on SocketException catch (error) {
+      throw DatabaseException(message: 'Failed to connect to database: ${error.message}');
+    }
   }
 
   @override
@@ -81,6 +88,20 @@ class PostgreDatabase extends Database {
                 ? SslMode.verifyFull
                 : SslMode.disable;
       }
+    }
+
+    if (host.isEmpty) {
+      throw DatabaseException(message: 'Invalid host value');
+    }
+    final parsedPort = int.tryParse(port);
+    if (parsedPort == null) {
+      throw DatabaseException(message: 'Invalid port value');
+    }
+    if (database.isEmpty) {
+      throw DatabaseException(message: 'Invalid database value');
+    }
+    if (username.isEmpty) {
+      throw DatabaseException(message: 'Invalid username value');
     }
 
     final endpoint = Endpoint(
