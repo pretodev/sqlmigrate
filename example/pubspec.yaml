@@ -15,9 +15,9 @@ dev_dependencies:
     path: ../
 
 
-db_config:
+sqlmigrate:
   production:
     dialect: postgres
-    datasource: dbname=${DB_NAME} user=${DB_USER} password=${DB_PASSWORD} sslmode=disable
+    datasource: dbname=postgres user=postgres password=${DB_PASSWORD} sslmode=disable
     dir: migrations/postgres
     table: migrations
